@@ -1,15 +1,9 @@
 FROM python:3.11-slim
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PORT=7860
-
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir langflow==1.12.4
 
-EXPOSE 7860
+EXPOSE 10000
 
-CMD ["sh", "-c", "langflow run --host 0.0.0.0 --port ${PORT}"]
+CMD sh -c "langflow run --host 0.0.0.0 --port ${PORT:-10000}"
