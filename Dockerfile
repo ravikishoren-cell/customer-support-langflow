@@ -1,9 +1,7 @@
-FROM python:3.11-slim
+FROM langflowai/langflow:latest
 
-WORKDIR /app
-
-RUN pip install --no-cache-dir langflow==1.12.4
+ENV PYTHONUNBUFFERED=1
 
 EXPOSE 10000
 
-CMD sh -c "langflow run --host 0.0.0.0 --port ${PORT:-10000}"
+CMD ["sh", "-c", "langflow run --host 0.0.0.0 --port ${PORT:-10000}"]
